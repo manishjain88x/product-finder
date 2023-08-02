@@ -26,7 +26,7 @@ open class ProductDetailsViewModel @Inject constructor(
 
     fun getProductDetails(id: String) {
         //val productDetailsResult = MutableLiveData<Resource<Product>>()
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             productDetailsResult.postValue(Resource.Loading())
             if (isInternetAvailable()) {
                 try {
