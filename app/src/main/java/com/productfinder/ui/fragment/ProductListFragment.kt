@@ -9,7 +9,9 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.productfinder.data.network.Resource
 import com.productfinder.databinding.FragmentProductListBinding
+import com.productfinder.models.Product
 import com.productfinder.ui.adapter.ProductListAdapter
 import com.productfinder.viewmodel.ProductsListViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -66,19 +68,26 @@ class ProductListFragment : Fragment() {
 
     private fun observeRecentViewsOrder() {
         viewModel.recentProductsResult.observe(this.viewLifecycleOwner) {
-            if (it.isEmpty()) {
-                binding.textView.visibility = View.GONE
-            } else {
-                binding.textView.visibility = View.VISIBLE
+            if (it is Resource.Success) {
+                val recentProducts = it.data
+                bindAdapter(recentProducts!!)
+                binding.tvNoProductsAvailable.visibility = View.GONE
+            } else if (it is Resource.Error) {
+                binding.tvNoProductsAvailable.text = it.message
+                binding.tvNoProductsAvailable.visibility = View.VISIBLE
             }
-            binding.rvProducts.adapter = ProductListAdapter(it) { product ->
-                val action =
-                    ProductListFragmentDirections.actionProductListFragmentToProductDetailsFragment(
-                        product.id.toString()
-                    )
 
-                findNavController().navigate(action)
-            }
+        }
+    }
+
+    private fun bindAdapter(productList: List<Product>) {
+        binding.rvProducts.adapter = ProductListAdapter(productList) { product ->
+            val action =
+                ProductListFragmentDirections.actionProductListFragmentToProductDetailsFragment(
+                    product.id.toString()
+                )
+
+            findNavController().navigate(action)
         }
     }
 

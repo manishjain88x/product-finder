@@ -19,6 +19,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/recent_searched_products" />
+    <TextView
+        android:id="@+id/tvNoProductsAvailable"
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        android:layout_height="match_parent"
+        tools:text="No Data found" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProducts"
@@ -33,6 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:itemCount="5"
         tools:listitem="@layout/item_product" />
+
 
 
 </LinearLayout>

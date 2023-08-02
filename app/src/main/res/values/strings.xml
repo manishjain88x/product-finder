@@ -13,7 +13,7 @@
     <string name="price">\u20B9 %.2f</string>
     <string name="discount">%.2f%% <b>off</b> %s</string>
     <string name="search_product">Search product</string>
-    <string name="recent_searched_products">Recent Searched Products</string>
+    <string name="recent_searched_products">Recently Visited Product</string>
     <string name="search_products">Search Products</string>
     <string name="search_validation_error_msg">Please enter text</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -21,4 +21,7 @@
     <string name="search_result">Search Result</string>
     <string name="rating_description">Rating from customers</string>
     <string name="no_internet_available">No Internet Connection.</string>
+    <string name="no_recent_item_msg">Display product that you recently visited. Review them anytime.</string>
+
+
 </resources>
